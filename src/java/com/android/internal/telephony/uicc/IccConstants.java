@@ -101,6 +101,12 @@ public interface IccConstants {
     //Search interval for higher priority PLMNs
     static final int EF_HPPLMN = 0x6F31;
 
+    //plmnwact
+    static final int EF_PLMNWACT = 0x6F63;
+
+    //hplmnwact
+    static final int EF_HPLMNWACT = 0x6F64;
+
     // SMS record length from TS 51.011 10.5.3
     static public final int SMS_RECORD_LENGTH = 176;
     // SMS record length from C.S0023 3.4.27
