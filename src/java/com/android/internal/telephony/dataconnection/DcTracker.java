@@ -1899,7 +1899,7 @@ public class DcTracker extends Handler {
         } else if (mAllowUserEditTetherApn) {
             for (ApnSetting apn : mAllApnSettings) {
                 if (apn.canHandleType(PhoneConstants.APN_TYPE_DUN)) {
-                    dunCandidates.add(apn)
+                    dunCandidates.add(apn);
 				}
 			}
 		}
