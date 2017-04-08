@@ -1904,9 +1904,7 @@ public class DcTracker extends Handler {
 			}
 		}
         List<ApnSetting> dunSettings = ApnSetting.arrayFromString(apnData);
-        IccRecords r = mIccRecords.get();
         for (ApnSetting dunSetting : dunSettings) {
-            String operator = mPhone.getOperatorNumeric();
             if (!ServiceState.bitmaskHasTech(dunSetting.bearerBitmask, bearer)) continue;
             if (dunSetting.numeric.equals(operator)) {
                 if (dunSetting.hasMvnoParams()) {

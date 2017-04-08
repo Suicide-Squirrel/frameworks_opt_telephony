@@ -182,8 +182,6 @@ public class CdmaInboundSmsHandler extends InboundSmsHandler {
             if (!sms.processCdmaCTWdpHeader(sms)) {
                 return Intents.RESULT_SMS_HANDLED;
             }
-            return processCdmaWapPdu(sms.getUserData(), sms.mMessageRef,
-                    sms.getOriginatingAddress(), sms.getTimestampMillis());
         }
 
         return dispatchNormalMessage(smsb);
