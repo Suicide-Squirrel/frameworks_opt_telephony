@@ -1893,31 +1893,13 @@ public class DcTracker extends Handler {
         // Places to look for tether APN in order: TETHER_DUN_APN setting, APN database if
         // carrier allows it, and config_tether_apndata resource.
         String apnData = Settings.Global.getString(mResolver, Settings.Global.TETHER_DUN_APN);
-		if (!TextUtils.isEmpty(apnData)) {
+        if (!TextUtils.isEmpty(apnData)) {
             dunCandidates.addAll(ApnSetting.arrayFromString(apnData));
             if (VDBG) log("fetchDunApn: dunCandidates from Setting: " + dunCandidates);
         } else if (mAllowUserEditTetherApn) {
             for (ApnSetting apn : mAllApnSettings) {
                 if (apn.canHandleType(PhoneConstants.APN_TYPE_DUN)) {
                     dunCandidates.add(apn);
-				}
-			}
-		}
-        List<ApnSetting> dunSettings = ApnSetting.arrayFromString(apnData);
-        for (ApnSetting dunSetting : dunSettings) {
-            if (!ServiceState.bitmaskHasTech(dunSetting.bearerBitmask, bearer)) continue;
-            if (dunSetting.numeric.equals(operator)) {
-                if (dunSetting.hasMvnoParams()) {
-                    if (r != null && ApnSetting.mvnoMatches(r, dunSetting.mvnoType,
-                            dunSetting.mvnoMatchData)) {
-                        if (VDBG) {
-                            log("fetchDunApn: global TETHER_DUN_APN dunSetting=" + dunSetting);
-                        }
-                        return dunSetting;
-                    }
-                } else if (mMvnoMatched == false) {
-                    if (VDBG) log("fetchDunApn: global TETHER_DUN_APN dunSetting=" + dunSetting);
-                    return dunSetting;
                 }
             }
             if (VDBG) log("fetchDunApn: dunCandidates from database: " + dunCandidates);
@@ -3426,7 +3408,7 @@ public class DcTracker extends Handler {
         notifyOffApnsOfAvailability(reason);
     }
 
-    private void setDataProfilesAsNeeded() {
+    protected void setDataProfilesAsNeeded() {
         if (DBG) log("setDataProfilesAsNeeded mSetDataProfileStatus: " + mSetDataProfileStatus);
         if (mAllApnSettings != null && !mAllApnSettings.isEmpty()) {
             ArrayList<DataProfile> dps = new ArrayList<DataProfile>();
